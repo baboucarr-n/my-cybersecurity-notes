@@ -1,0 +1,68 @@
+# The uniq Command -- Duplicate Filtering
+
+*Date: 17 February 2026*
+
+uniq is a powerful utility for identifying and filtering duplicate text lines in a file.
+
+## Using uniq to Remove Duplicate Entries
+
+Say we have a file with data like:
+```
+Lamin,Electronics
+Lamin,Electronics
+Lamin,Electronics
+Fatou,Books
+Fatou,Books
+Ebrima,Clothing
+Ebrima,Clothing
+Awa,Home Goods
+Ousman,Toys
+Mariama,Sports
+```
+
+To remove duplicate entries:
+```
+uniq theFileName theOutputFile
+```
+
+- uniq -- filters out repeated lines
+- theFileName -- the input file (must already be sorted, since uniq only removes adjacent duplicates)
+- theOutputFile -- where the deduplicated result gets saved
+
+uniq reads through theFileName, removes adjacent duplicate lines, and writes the result into theOutputFile.
+
+## Counting Occurrences (-c)
+
+```
+uniq -c theFileName theOutputFile
+```
+
+- -c -- prefixes each line with how many times it occurred
+
+Output:
+```
+3 Lamin,Electronics
+2 Fatou,Books
+2 Ebrima,Clothing
+1 Awa,Home Goods
+1 Ousman,Toys
+1 Mariama,Sports
+```
+The number at the start of each line shows how many purchases that customer made.
+
+## Finding Repeated Values (-d)
+
+```
+uniq -d theFileName theOutputFile
+```
+
+- -d -- only prints lines that appeared more than once (i.e. the actual duplicates)
+
+This is useful for finding, say, which customers made repeat purchases -- the output only shows entries that showed up multiple times in the original data.
+
+## Other Options Worth Knowing
+
+- -u -- show only unique lines (ones that appear exactly once)
+- -i -- ignore case when comparing lines
+- -f N -- skip the first N fields when comparing
+- -s N -- skip the first N characters when comparing
